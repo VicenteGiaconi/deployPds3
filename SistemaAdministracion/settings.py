@@ -27,7 +27,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = "django-insecure-0wbqkxns76lzg-0nl!+h$q)nsmce@t!+z%u9$79g0=iaoa5jqs"
+SECRET_KEY = os.getenv('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -107,33 +107,24 @@ WSGI_APPLICATION = "SistemaAdministracion.wsgi.application"
 # https://docs.djangoproject.com/en/5.1/ref/settings/#databases
 
 # DATABASES = {
-#     "default": {
-#         "ENGINE": "django.db.backends.sqlite3",
-#         "NAME": BASE_DIR / "db.sqlite3",
-#     }
-# }
-
-
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-#         'NAME': os.getenv('POSTGRESQL_NAME'),
-#         'USER': os.getenv('POSTGRESQL_USER'),
-#         'PASSWORD': os.getenv('POSTGRESQL_PASS'),
-#         'HOST': os.getenv('POSTGRESQL_HOST'),
-#         'PORT': os.getenv('POSTGRESQL_PORT'),
-#     }
+#     'default': dj_database_url.config(
+#         # Replace this value with your local database's connection string.
+#         default='postgresql://{}:{}@{}:{}/{}'.format(
+#             os.getenv('POSTGRESQL_USER'),
+#             os.getenv('POSTGRESQL_PASS'),
+#             os.getenv('POSTGRESQL_HOST'),
+#             os.getenv('POSTGRESQL_PORT'),
+#             os.getenv('POSTGRESQL_NAME')
+#         ),
+#         conn_max_age=600
+#     )
 # }
 
 DATABASES = {
     'default': dj_database_url.config(
         # Replace this value with your local database's connection string.
-        default='postgresql://{}:{}@{}:{}/{}'.format(
-            os.getenv('POSTGRESQL_USER'),
-            os.getenv('POSTGRESQL_PASS'),
-            os.getenv('POSTGRESQL_HOST'),
-            os.getenv('POSTGRESQL_PORT'),
-            os.getenv('POSTGRESQL_NAME')
+        default='postgresql://{}'.format(
+            os.getenv('DATABASE_URL')
         ),
         conn_max_age=600
     )
