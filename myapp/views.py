@@ -42,10 +42,17 @@ def on_message(client, userdata, msg):
 
         a = json.loads(msg.payload.decode())
 
-        casillero = Casillero.objects.get(id=a['locker_id'])
-        casillero_serializer = CasilleroSerializer(casillero).data
+        if a['flag'] == 'apertura':
+            casillero = Casillero.objects.get(id=a['locker_id'])
+            casillero_serializer = CasilleroSerializer(casillero).data
 
-        send_open_mail(casillero_serializer)
+            send_open_mail(casillero_serializer)
+        
+        elif a['flag'] == 'cierre':
+            casilleros = Casillero.objects.all()
+            casilleeros_serializer = CasilleroSerializer(casilleros, many=True).data
+            for casillero in casilleeros_serializer:
+                send_close_mail(casillero)
                                                           
 client.on_connect = on_connect
 client.on_message = on_message
@@ -194,7 +201,24 @@ def send_open_mail(casillero):
     email.send()
     print("Correo enviado con éxito indicando que se abrió el casillero.")
 
+def send_close_mail(casillero):
+    subject = f"Casillero {casillero['id']} cerrado"
+    recipient_list = [casillero['email']]
 
+    html_content = """
+    <html>
+    <body>
+        <p>El casillero ha sido cerrado.</p>
+    </body>
+    </html>
+    """
+    email = EmailMessage(subject, "", settings.EMAIL_HOST_USER, recipient_list)
+
+    email.content_subtype = "html"
+    email.body = html_content
+    # Envía el correo
+    email.send()
+    print("Correo enviado con éxito indicando que se cerro el casillero.")
 
 def publish_new_key_mqtt(casillero_id, new_password):
     message = f'{{"locker_id": {casillero_id}, "message": "{new_password}"}}'
