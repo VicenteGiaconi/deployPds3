@@ -1,0 +1,67 @@
+**/__pycache__/
+# Archivos y carpetas de Python
+*.pyc
+*.pyo
+*.pyd
+__pycache__/
+*.env
+*.venv
+*.envrc
+*.egg
+*.egg-info/
+.eggs/
+
+# Archivos de configuración de Django
+db.sqlite3
+*.sqlite3
+/secrets.json
+
+# Archivos de migración
+**/migrations/**
+
+# Entornos virtuales
+venv/
+ENV/
+env/
+
+# Archivos de log
+*.log
+
+# Configuraciones locales
+*.local
+*.DS_Store
+*.idea/
+*.vscode/
+
+# Archivos de compilación y distribución
+build/
+dist/
+*.bak
+*.swp
+*.swo
+
+# Carpetas de caché y archivos temporales
+__pycache__/
+*.py[cod]
+.cache/
+.coverage
+.tox/
+nosetests.xml
+coverage.xml
+*.cover
+*.py,cover
+.hypothesis/
+
+# Archivos y carpetas generados por pytest y otros tests
+.pytest_cache/
+
+# Archivos de static y media generados
+/staticfiles/
+/media/
+
+# Archivos creados por npm, yarn, etc. (si el proyecto usa frontend)
+node_modules/
+npm-debug.log
+yarn-error.log
+
+/Sistema_Admin/client_secret_211709931472-54vqorkfdgcsv2jpm79t84e3pm5q7d9r.apps.googleusercontent.com.json

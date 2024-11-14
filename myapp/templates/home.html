@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% load socialaccount %}
+{% block title %}Home Page{% endblock %}
+
+{% block content %}
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-6 text-center">
+                {% if user.is_authenticated %}
+                    <h2 class="mb-4">You are signed in as {{ user.email }}</h2>
+                    <a href="{% url 'account_logout' %}" class="btn btn-danger">Logout</a>
+                {% else %}
+                    <h2 class="mb-4">Welcome</h2>
+                    <p>Login or Sign Up to continue</p>
+                    <a href="{% provider_login_url 'google' %}?next=/" class="btn btn-primary">
+                        <i class="fab fa-google"></i> Authentication
+                    </a>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+{% endblock %}

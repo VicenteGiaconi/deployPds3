@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+
+{% block title %}Casillero{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <h2>Controlador 1</h2>
+    <h2>Casillero {{ casillero.id }}</h2>
+
+    <!-- Contenedor para casilleros activos -->
+    <div class="d-flex flex-wrap mb-4">
+        <h5>Dueño: {{ casillero.dueño }}</h5>
+    </div>
+    <div class="d-flex flex-wrap mb-4">
+        <h5>Email: {{ casillero.email }}</h5>
+    </div>
+    <div class="d-flex flex-wrap mb-4">
+        <h5>Password: {{ casillero.password }}</h5>
+    </div>
+    <a href="{{ casillero.id }}/edit" class="btn btn-link p-0">editar</a>
+</div>
+{% endblock %}
