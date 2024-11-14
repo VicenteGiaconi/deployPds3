@@ -7,7 +7,7 @@ pip install -r requirements.txt
 
 mkdir myapp/migrations
 
-echo. > myapp/migrations/__init__.py
+touch myapp/migrations/__init__.py
 
 python manage.py makemigrations
 
